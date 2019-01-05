@@ -9,6 +9,6 @@ request(
   (error, response, body) => {
     console.log(`Address: ${body.results[0].providedLocation.location}`);
     console.log(`Latitude: ${body.results[0].locations[0].latLng.lat}`);
-    console.log(`Longitude: , lng: ${body.results[0].locations[0].latLng.lng}`);
+    console.log(`Longitude: ${body.results[0].locations[0].latLng.lng}`);
   }
 );
