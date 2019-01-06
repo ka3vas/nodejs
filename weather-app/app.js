@@ -1,5 +1,4 @@
-const yargs = require("yargs");
-const request = require("request");
+// const yargs = require("yargs");
 
 // const geocode = require("./geocode/geocode");
 
@@ -23,9 +22,8 @@ const request = require("request");
 //   }
 // });
 
-// faecca5be9fe21f7b17820000577155a
-
 // log current temperature
+const request = require("request");
 
 request(
   {
