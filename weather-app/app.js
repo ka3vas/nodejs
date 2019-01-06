@@ -1,5 +1,6 @@
-const request = require("request");
 const yargs = require("yargs");
+
+const geocode = require("./geocode/geocode");
 
 const argv = yargs
   .options({
@@ -13,23 +14,12 @@ const argv = yargs
   .help()
   .alias("help", "h").argv;
 
-var encodedAddress = encodeURIComponent(argv.address);
-console.log(encodedAddress);
-
-request(
-  {
-    url: `http://www.mapquestapi.com/geocoding/v1/address?key=oIZxoWu1f8NAVL6SSBde6h3JGsgdbeQJ&location=${encodedAddress}`,
-    json: true
-  },
-  (error, response, body) => {
-    if (error) {
-      console.log("Cannot connect to servers.");
-    } else if (body.info.statuscode !== 0) {
-      console.log("Unable to find the address.");
-    } else {
-      console.log(`Address: ${body.results[0].providedLocation.location}`);
-      console.log(`Latitude: ${body.results[0].locations[0].latLng.lat}`);
-      console.log(`Longitude: ${body.results[0].locations[0].latLng.lng}`);
-    }
+geocode.geocodeAddress(argv.address, (errMsg, res) => {
+  if (errMsg) {
+    console.log(errMsg);
+  } else {
+    console.log(JSON.stringify(res, null, 2));
   }
-);
+});
+
+// faecca5be9fe21f7b17820000577155a
