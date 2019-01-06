@@ -2,6 +2,7 @@ const yargs = require("yargs");
 const axios = require("axios");
 
 const apiKeys = require("./api/api-keys");
+const { geocode, forecast } = apiKeys;
 
 const argv = yargs
   .options({
@@ -16,9 +17,7 @@ const argv = yargs
   .alias("help", "h").argv;
 
 var encodedAddress = encodeURIComponent(argv.address);
-var geocodeUrl = `http://www.mapquestapi.com/geocoding/v1/address?key=${
-  apiKeys.geocode
-}&location=${encodedAddress}`;
+var geocodeUrl = `http://www.mapquestapi.com/geocoding/v1/address?key=${geocode}&location=${encodedAddress}`;
 
 axios
   .get(geocodeUrl)
@@ -29,9 +28,7 @@ axios
 
     const { lat, lng } = response.data.results[0].locations[0].latLng;
     const { location } = response.data.results[0].providedLocation;
-    const weatherUrl = `
-      https://api.darksky.net/forecast/${apiKeys.forecast}/${lat},${lng}
-    `;
+    const weatherUrl = `https://api.darksky.net/forecast/${forecast}/${lat},${lng}`;
 
     console.log(location);
     return axios.get(weatherUrl);
