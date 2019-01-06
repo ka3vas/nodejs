@@ -30,7 +30,7 @@ geocode.geocodeAddress(argv.address, (errMsg, res) => {
         // console.log(JSON.stringify(weatherRes, null, 2));
         const { temperature, apparentTemperature } = weatherRes;
         console.log(
-          `Its currently ${temperature}, but it feels like ${apparentTemperature}`
+          `Its currently ${temperature}, but it feels like ${apparentTemperature}.`
         );
       }
     });
